@@ -9,5 +9,5 @@ Student Email : cluo21@myseneca.ca
 Course/Section: WEB322 NCC
 
 ## Project URLs
-GitHub Repo   : https://github.com/cy9096/web322-cluo21/ \n
+GitHub Repo   : https://github.com/cy9096/web322-cluo21/ <br>
 Cyclic URL    : https://<app_name>.cyclic.app/
