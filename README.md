@@ -5,8 +5,8 @@ No part of this assignment has been copied manually or electronically from any o
 (including web sites) or distributed to other students.
 
 Student Name  : Wing Lo
-Student Email : cluo21@myseneca.ca
-Course/Section: WEB322 NCC
+<br>Student Email : cluo21@myseneca.ca
+<br>Course/Section: WEB322 NCC
 
 ## Project URLs
 GitHub Repo   : https://github.com/cy9096/web322-cluo21/ <br>
