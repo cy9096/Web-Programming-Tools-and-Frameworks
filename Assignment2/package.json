@@ -1,17 +1,25 @@
 {
-  "name": "hbs-demo",
+  "name": "assignment2",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cy9096/web322-cluo21.git"
+  },
   "author": "Wing Lo",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cy9096/web322-cluo21/issues"
+  },
+  "homepage": "https://github.com/cy9096/web322-cluo21#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^6.0.7"
-  },
-  "description": "The purpose of this assignment is to create a web page as instructed by the professor."
+    "express-handlebars": "^6.0.7",
+    "handlebars": "^4.7.7"
+  }
 }
