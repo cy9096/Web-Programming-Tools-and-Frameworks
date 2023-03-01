@@ -10,4 +10,4 @@ Student Name  : Wing Lo
 
 ## Project URLs
 GitHub Repo   : https://github.com/cy9096/web322-cluo21/ <br>
-Cyclic URL    : https://<app_name>.cyclic.app/
+Cyclic URL    : https://creepy-shirt-frog.cyclic.app
