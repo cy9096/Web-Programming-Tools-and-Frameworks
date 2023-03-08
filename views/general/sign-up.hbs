@@ -1,0 +1,44 @@
+<div class="container-signup">
+  <div class="border border-dark p-4 border-opacity-75">
+    <div class="row">
+      <div class="sign-up-title">
+        <h1>Sign up</h1>
+        <p>Create your account by entering your email address and choosing a password</p>
+      </div>
+      <form method="post" action="/sign-up" class="signup" >
+          <label for="firstName" class="form-label"></label>
+          <input type="text" class="form-control" id="firstName" name="firstName" value="{{values.firstName}}" placeholder="First Name">
+
+        {{#if validationMessages.firstName}}
+        <span style="color: red;">{{validationMessages.firstName}}</span>
+        {{/if}}
+       
+          <label for="lastName" class="form-label"></label>
+          <input type="text" class="form-control" id="lastName" name="lastName" value="{{values.lastName}}" placeholder="Last Name">
+  
+        {{#if validationMessages.lastName}}
+        <span style="color: red;">{{validationMessages.lastName}}</span>
+        {{/if}}
+       
+          <label for="email" class="form-label"></label>
+          <input type="text" class="form-control" id="email" name="email" value="{{values.email}}" placeholder="Email Address">
+        
+        {{#if validationMessages.email}}
+        <span style="color: red;">{{validationMessages.email}}</span>
+        {{/if}}
+     
+          <label for="password" class="form-label"></label>
+          <input type="password" class="form-control" id="password" name="password" value="{{values.password}}" placeholder="Password">
+       
+        {{#if validationMessages.password}}
+        <span style="color: red;">{{validationMessages.password}}</span>
+        {{/if}}
+
+        
+        {{!-- <div class="d-grid" id="sign-up-btn"> --}}
+          <input type="submit" value="Sign up today">
+        {{!-- </div> --}}
+      </form>
+    </div>
+  </div>
+</div>

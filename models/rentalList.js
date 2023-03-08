@@ -117,3 +117,4 @@ module.exports.getRentalsByCityAndProvince = function() {
 //         return result;
 //     }
 // }
+

@@ -19,11 +19,11 @@
 }
 
 .container-login form {
-    max-width: 600px;
     width: 100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.2rem;
     color: grey;
+    margin: center;
 }
 
 .container-login form input {

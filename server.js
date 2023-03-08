@@ -14,6 +14,12 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const rentals = require("./models/rentalList");
 
+//set up dotenv
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config/keys.env" });
+
+
+//setup the express app
 const app = express();
 
 // Set up HandleBars
@@ -27,30 +33,60 @@ app.set("view engine", ".hbs");
 // Make the "assets" folder public.
 app.use(express.static(path.join(__dirname, "/assets")));
 
+
+// Set up body-parser
+app.use(express.urlencoded({ extended: false }));
+
+
+//configure the controllers
+const generalController = require("./controllers/generalController");
+const rentalsListController = require("./controllers/rentalsListController");
+
+app.use("/", generalController);
+app.use("/rentalsList", rentalsListController);
+
+
+// //API to get list of users
+// app.get("/api/users", (req, res) => {
+//     var responseObj = {
+//         message: "Sending a list of all users",
+//     };
+//     res.json(responseObj);
+// });
+
+// app.get("/api/users/:userId", (req, res) => {
+//     var responseObj = {
+//         userId: parseInt(userId),
+//         message: 'Sending a user with the id ${userId}'
+//     };
+//     res.json(responseObj);
+// });
+
+
+
+/*==================================================== Router for Assignment 2 ====================================================*/
 // Load the controllers into express.
-app.get("/", (req, res) => {
-    res.render("home", {
-        rentalsData: rentals.getFeaturedRentals()
-    });
-});
+// app.get("/", (req, res) => {
+//     res.render("home", {
+//         rentalsData: rentals.getFeaturedRentals()
+//     });
+// });
 
-app.get("/rentals", function (req, res) {
-    // console.log(rentals.getRentalsByCityAndProvince());
-    res.render("rentals", {
+// app.get("/rentals", function (req, res) {
+//     // console.log(rentals.getRentalsByCityAndProvince());
+//     res.render("rentals", {
         
-        rentalsData: rentals.getRentalsByCityAndProvince()
-    });
-});
-app.get("/sign-up", function (req, res) {
-    res.render("sign-up");
-});
-app.get("/log-in", function (req, res) {
-    res.render("log-in");
-});
+//         rentalsData: rentals.getRentalsByCityAndProvince()
+//     });
+// });
+// app.get("/sign-up", function (req, res) {
+//     res.render("sign-up");
+// });
+// app.get("/log-in", function (req, res) {
+//     res.render("log-in");
+// });
 
-
-
-
+/*=================================================================================================================================*/
 
 
 // *** DO NOT MODIFY THE LINES BELOW ***

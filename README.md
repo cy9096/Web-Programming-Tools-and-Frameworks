@@ -9,5 +9,5 @@ Student Name  : Wing Lo
 <br>Course/Section: WEB322 NCC
 
 ## Project URLs
-GitHub Repo   : https://github.com/cy9096/web322-cluo21/ <br>
-Cyclic URL    : https://creepy-shirt-frog.cyclic.app
+GitHub Repo   : https://github.com/cy9096/web322-cluo21/ 
+<br>Cyclic URL    : https://creepy-shirt-frog.cyclic.app
