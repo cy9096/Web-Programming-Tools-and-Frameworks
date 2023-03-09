@@ -7,7 +7,7 @@ const rentals = require("../models/rentalList");
 router.get("/", function (req, res) {
     res.render("general/home", {
         title: "Home page",
-        // rentalsData: rentals.getFeaturedRentals()
+        rentalsData: rentals.getFeaturedRentals()
     });
 });
 
@@ -20,9 +20,7 @@ router.get("/log-in", function (req, res) {
 
 // setup another route to listen on /log-in
 router.get("/welcome", function (req, res) {
-    res.render("general/welcome", {
-        title: "Welcome page"
-    });
+    res.render("general/welcome");
 });
 
 // setup another route to listen on /sig-up
@@ -35,7 +33,7 @@ router.get("/sign-up", function (req, res) {
 router.get("/rentals", function (req, res) {
     res.render("general/rentals", {
         title: "Rentals page",
-        // rentalsData: rentals.getRentalsByCityAndProvince()
+        rentalsData: rentals.getRentalsByCityAndProvince()
     });
 });
 
@@ -47,15 +45,15 @@ router.post("/sign-up", (req, res) => {
 
     const { firstName, lastName, email, password } = req.body;
 
-    var passedValidation = true;
-    var validationMessages = {};
+    let passedValidation = true;
+    let validationMessages = {};
 
 
     //first name validation
     if (typeof firstName !== "string" || firstName.trim().length == 0) {
 
         passedValidation = false;
-        validationMessages.firstName = "You must specify a first name";
+        validationMessages.firstName = "Please enter your first name";
     }
     else if (typeof firstName !== "string" || firstName.trim().length < 2) {
 
@@ -67,7 +65,7 @@ router.post("/sign-up", (req, res) => {
     if (typeof lastName !== "string" || lastName.trim().length == 0) {
 
         passedValidation = false;
-        validationMessages.lastName = "You must specify a first name";
+        validationMessages.lastName = "Please enter your last name";
     }
     else if (typeof lastName !== "string" || lastName.trim().length < 2) {
 
@@ -121,16 +119,29 @@ router.post("/sign-up", (req, res) => {
 
         const mg = {
             to: email,
-            from: "cluo21@myseneca.ca",
+            from: "luocying@hotmail.com",
             subject: "Welcome to LaChinita",
             html:
-                `Visitor's Full Name:  ${firstName} ${lastName} <br>
-                Visitor's Email: ${email} <br>`
+                `Hello ${firstName} ${lastName} !<br>
+                Your email address is: ${email} <br>
+                Please confirm your password: ${password}<br><br>
+                We are very happy to have you as our new member. <br><br>
+                As a registered user, you will receive our latest promotions and exclusive offers. 
+                We hope you enjoy exploring our products and services and find everything you are looking for.<br><br>
+                However, we understand that our emails may not be for everyone. 
+                If you would like to unsubscribe from our mailing list, 
+                please feel free to contact our customer service team and they will be happy to assist you.<br><br>
+                Thanks again for joining us.
+                We look forward to serving you and giving you the best possible experience.<br><br>
+                Sincerely,<br>
+                LaChinita Team<br>`
         };
 
         sgMail.send(mg)
             .then(() => {
-                res.render("general/welcome");
+                res.render("general/welcome", {
+                    title: "Welcome Page"
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -198,6 +209,41 @@ router.post("/log-in", (req, res) => {
     else if (password.search(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) < 0) {
         passedValidation = false;
         validationMessages.password = "Password must containing at least one symbol";
+    }
+
+
+    if (passedValidation) {
+
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
+        const mg = {
+            to: email,
+            from: "luocying@hotmail.com",
+            subject: "Welcome Back",
+            html:
+                `Welcome back ${firstName} ${lastName} !<br>`
+        };
+
+        sgMail.send(mg)
+            .then(() => {
+                res.render("general/home");
+            })
+            .catch(err => {
+                console.log(err);
+                res.render("general/log-in", {
+                    title: "Log in Page",
+                    validationMessages,
+                    values: req.body
+                });
+            })
+    }
+    else {
+        res.render("general/log-in", {
+            title: "Log in Page",
+            validationMessages,
+            values: req.body
+        });
     }
 
 });
