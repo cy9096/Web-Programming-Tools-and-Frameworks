@@ -40,10 +40,10 @@ app.use(express.urlencoded({ extended: false }));
 
 //configure the controllers
 const generalController = require("./controllers/generalController");
-const rentalsListController = require("./controllers/rentalsListController");
+//const rentalsListController = require("./controllers/rentalsListController");
 
 app.use("/", generalController);
-app.use("/rentalsList", rentalsListController);
+//app.use("/rentalsList", rentalsListController);
 
 
 // //API to get list of users
