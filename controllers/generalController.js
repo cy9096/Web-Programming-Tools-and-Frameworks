@@ -55,11 +55,11 @@ router.post("/sign-up", (req, res) => {
         passedValidation = false;
         validationMessages.firstName = "Please enter your first name";
     }
-    else if (typeof firstName !== "string" || firstName.trim().length < 2) {
+    // else if (typeof firstName !== "string" || firstName.trim().length < 2) {
 
-        passedValidation = false;
-        validationMessages.firstName = "The first name should be at least 2 characters long.";
-    }
+    //     passedValidation = false;
+    //     validationMessages.firstName = "The first name should be at least 2 characters long.";
+    // }
 
     //last name validation
     if (typeof lastName !== "string" || lastName.trim().length == 0) {
@@ -67,11 +67,11 @@ router.post("/sign-up", (req, res) => {
         passedValidation = false;
         validationMessages.lastName = "Please enter your last name";
     }
-    else if (typeof lastName !== "string" || lastName.trim().length < 2) {
+    // else if (typeof lastName !== "string" || lastName.trim().length < 2) {
 
-        passedValidation = false;
-        validationMessages.lastName = "The last name should be at least 2 characters long.";
-    }
+    //     passedValidation = false;
+    //     validationMessages.lastName = "The last name should be at least 2 characters long.";
+    // }
 
 
     //email validation
@@ -214,29 +214,30 @@ router.post("/log-in", (req, res) => {
 
     if (passedValidation) {
 
-        const sgMail = require('@sendgrid/mail');
-        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+        // const sgMail = require('@sendgrid/mail');
+        // sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-        const mg = {
-            to: email,
-            from: "luocying@hotmail.com",
-            subject: "Welcome Back",
-            html:
-                `Welcome back ${firstName} ${lastName} !<br>`
-        };
+        // const mg = {
+        //     to: email,
+        //     from: "luocying@hotmail.com",
+        //     subject: "Welcome Back",
+        //     html:
+        //         `Welcome back ${firstName} ${lastName} !<br>`
+        // };
 
-        sgMail.send(mg)
-            .then(() => {
-                res.render("general/home");
-            })
-            .catch(err => {
-                console.log(err);
-                res.render("general/log-in", {
-                    title: "Log in Page",
-                    validationMessages,
-                    values: req.body
-                });
-            })
+        // sgMail.send(mg)
+        //     .then(() => {
+        //         res.render("general/home");
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         res.render("general/log-in", {
+        //             title: "Log in Page",
+        //             validationMessages,
+        //             values: req.body
+        //         });
+        //     })
+        res.redirect("/home");
     }
     else {
         res.render("general/log-in", {

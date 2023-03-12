@@ -1,7 +1,7 @@
 {
-  "name": "assignment3",
+  "name": "web322-cluo21",
   "version": "1.0.0",
-  "description": "",
+  "description": "My third Assignment",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,6 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/cy9096/web322-cluo21.git"
   },
+  "keywords": [
+    "rentals",
+    "express",
+    "validation"
+  ],
   "author": "Wing Lo",
   "license": "ISC",
   "bugs": {
@@ -21,7 +26,6 @@
     "@sendgrid/mail": "^7.7.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-handlebars": "^6.0.7",
-    "handlebars": "^4.7.7"
+    "express-handlebars": "^7.0.2"
   }
 }

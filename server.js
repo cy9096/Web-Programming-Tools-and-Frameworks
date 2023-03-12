@@ -40,27 +40,11 @@ app.use(express.urlencoded({ extended: false }));
 
 //configure the controllers
 const generalController = require("./controllers/generalController");
-//const rentalsListController = require("./controllers/rentalsListController");
+
 
 app.use("/", generalController);
-//app.use("/rentalsList", rentalsListController);
 
 
-// //API to get list of users
-// app.get("/api/users", (req, res) => {
-//     var responseObj = {
-//         message: "Sending a list of all users",
-//     };
-//     res.json(responseObj);
-// });
-
-// app.get("/api/users/:userId", (req, res) => {
-//     var responseObj = {
-//         userId: parseInt(userId),
-//         message: 'Sending a user with the id ${userId}'
-//     };
-//     res.json(responseObj);
-// });
 
 
 
