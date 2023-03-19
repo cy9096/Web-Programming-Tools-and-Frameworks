@@ -12,7 +12,7 @@
 const path = require("path");
 const express = require("express");
 const exphbs = require("express-handlebars");
-const rentals = require("./models/rentalList");
+const rentals = require("./models/rentals-db");
 
 //set up dotenv
 const dotenv = require("dotenv");

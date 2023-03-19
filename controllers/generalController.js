@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const rentals = require("../models/rentalList");
+const rentals = require("../models/rentals-db");
 
 
 // setup a 'route' to listen on the default url path (http://localhost)
