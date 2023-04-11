@@ -13,14 +13,23 @@ const path = require("path");
 const express = require("express");
 const exphbs = require("express-handlebars");
 const rentals = require("./models/rentals-db");
-
-//set up dotenv
-const dotenv = require("dotenv");
-dotenv.config({ path: "./config/keys.env" });
+const mongoose = require("mongoose");
+const session = require("express-session");
+const bcrypt = require("bcryptjs");
+const fileUpload = require("express-fileupload");
 
 
 //setup the express app
 const app = express();
+
+//set up express-fuleupload
+app.use(fileUpload());
+
+
+//set up dotenv protect environment variables
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config/keys.env" });
+
 
 // Set up HandleBars
 app.engine(".hbs", exphbs.engine({
@@ -37,42 +46,35 @@ app.use(express.static(path.join(__dirname, "/assets")));
 // Set up body-parser
 app.use(express.urlencoded({ extended: false }));
 
+// Set up express-session
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use((req, res, next) => {
+    // res.locals.user is a global handlebars variable.
+    // This means that every single handlebars file can access this variable.
+    res.locals.user = req.session.user;
+    req.session.isClerk;
+    next();
+});
 
 //configure the controllers
-const generalController = require("./controllers/generalController");
+const generalController = require("./controllers/general");
+const rentalsController = require("./controllers/rentals");
+const loadDataController = require("./controllers/load-data");
 
 
 app.use("/", generalController);
+app.use("/rentals", rentalsController);
+app.use("/load-data", loadDataController);
 
 
 
-
-
-/*==================================================== Router for Assignment 2 ====================================================*/
-// Load the controllers into express.
-// app.get("/", (req, res) => {
-//     res.render("home", {
-//         rentalsData: rentals.getFeaturedRentals()
-//     });
-// });
-
-// app.get("/rentals", function (req, res) {
-//     // console.log(rentals.getRentalsByCityAndProvince());
-//     res.render("rentals", {
-        
-//         rentalsData: rentals.getRentalsByCityAndProvince()
-//     });
-// });
-// app.get("/sign-up", function (req, res) {
-//     res.render("sign-up");
-// });
-// app.get("/log-in", function (req, res) {
-//     res.render("log-in");
-// });
 
 /*=================================================================================================================================*/
-
-
 // *** DO NOT MODIFY THE LINES BELOW ***
 
 // This use() will not allow requests to go beyond it
@@ -100,6 +102,19 @@ function onHttpStart() {
     console.log("Express http server listening on: " + HTTP_PORT);
 }
 
-// Listen on port 8080. The default port for http is 80, https is 443. We use 8080 here
-// because sometimes port 80 is in use by other applications on the machine
-app.listen(HTTP_PORT, onHttpStart);
+/* ======================= Connect to mongoDB ========================== */
+
+//connect to the mongodb database
+mongoose.connect(process.env.MONGO_CONN_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connected to MongoDB database.");
+
+    // Listen on port 8080. The default port for http is 80, https is 443. We use 8080 here
+    // because sometimes port 80 is in use by other applications on the machine
+    app.listen(HTTP_PORT, onHttpStart);
+
+}).catch(err => {
+    console.log(`Unable to connect to the MongoDB database. ERROR: ${err}`);
+});

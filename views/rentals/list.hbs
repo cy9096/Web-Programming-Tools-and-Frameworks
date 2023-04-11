@@ -1,0 +1,40 @@
+<div class="welcome-title">
+   <p>Hello {{user.firstName}} {{user.lastName}}</p>
+   <p>Welcome to Rentals list page</p>
+</div>
+<div class="container-rentals" id="rentals-rentals">
+   {{#if rentals}}
+   <div class="card">
+      <img src="/images/upload.jpg" class="card-img-top" alt="upload">
+      <div class="card-body">
+         <h5 class="card-title"><span>{{headline}}</span></h5>
+         <div>
+            <p class="text-black-50 "> Add your property by clicking the 'Add' button</p>
+
+            <div class="rental-price">If you are looking to maximize your rental income, you may want to consider adding
+               your property to a reputable rental website to help you reach a wider pool of potential tenants.</div>
+            <br>
+            <div class="card-footer" id="text-rental-footer"><a href="./add">Add</a> </div>
+         </div>
+      </div>
+   </div>
+
+   {{#each rentals}}
+   <div>
+      {{> rental this}}
+      <form method="get" action="/rentals/edit/{{_id}}">
+         <div class="card-footer" id="text-rental-footer"><a href="/rentals/edit/{{_id}}">Edit your property</a></div>
+      </form>
+
+      <form method="get" action="/rentals/remove/{{_id}}">
+         <div class="card-footer" id="text-rental-footer"> <a href="/rentals/remove/{{_id}}">Remove your property</a>
+         </div>
+      </form>
+   </div>
+   {{/each}}
+   {{else}}
+   <p>No rentals found</p>
+   {{/if}}
+
+
+</div>

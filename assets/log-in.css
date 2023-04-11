@@ -9,13 +9,14 @@
     margin-bottom: 10px;
 
 }
+
 .container-login h1 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #206dd2;
     margin-bottom: 1rem;
     text-align: center;
-    
+
 }
 
 .container-login form {
@@ -35,3 +36,10 @@
     font-size: 1.2rem;
 }
 
+#validationFormCheck1 {
+    width: auto;
+}
+
+#validationFormCheck2 {
+    width: auto;
+}

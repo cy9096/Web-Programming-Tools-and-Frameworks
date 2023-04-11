@@ -3,23 +3,38 @@
     <div class="row">
       <div class="header">
         <h1>Welcome back</h1>
-      </div>
+        <p>Test account: wxxxlaw@gmail.com</p>
+        <p>password: 12345#Yyyy</p>
 
-      <form method="post" action="/log-in" class="login" >
-          <label for="email" class="form-label"></label>
-          <input type="text" class="form-control" id="email" name="email" value="{{values.email}}" placeholder="Email">
+      </div>
+      {{#each errors}}
+      <p style="color:red;">{{this}}</p>
+      {{/each}}
+
+      <form method="post" action="/log-in" class="login">
+        <label for="email" class="form-label"></label>
+        <input type="text" class="form-control" id="email" name="email" value="{{values.email}}" placeholder="Email">
 
         {{#if validationMessages.email}}
         <span style="color: red;">{{validationMessages.email}}</span>
         {{/if}}
 
-          <label for="password" class="form-label"></label>
-          <input type="password" class="form-control" id="password" name="password" value="{{values.password}}" placeholder="Password">
+        <label for="password" class="form-label"></label>
+        <input type="password" class="form-control" id="password" name="password" value="{{values.password}}"
+          placeholder="Password">
         {{#if validationMessages.password}}
         <span style="color: red;">{{validationMessages.password}}</span>
         {{/if}}
 
-         <input type="submit" value="Log in">
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationFormCheck1" name="isClerk" value = "data_entry_clerk" checked>
+          <label class="form-check-label" for="validationFormCheck2">Data Entry Clerk</label>
+        </div>
+        <div class="form-check mb-3">
+          <input type="radio" class="form-check-input" id="validationFormCheck2" name="isClerk" value = "customer" >
+          <label class="form-check-label" for="validationFormCheck3">Customer</label>
+        </div>
+        <input type="submit" value="Log in">
       </form>
     </div>
   </div>

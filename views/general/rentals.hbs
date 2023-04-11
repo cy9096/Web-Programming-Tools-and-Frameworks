@@ -13,12 +13,13 @@
 
 {{!-- /*==================================== Rentals Feature ========================================== */ --}}
 <div class="container-rentals" id="rentals-rentals">
-
-  {{#each rentalsData}}
-  <h1>{{cityProvince}}</h1>
-  <br>
+  {{!-- {{#each rentalsData}}
+  <h1>{{cityProvince}}</h1> --}}
+  
+  {{!-- <br> --}}
   {{#each rentals}}
-  {{> rental this}}
-  {{/each}}
-  {{/each}}
+  <div>{{> rental this}}</div>
+  {{!-- {{/each}} --}}
+   {{/each}}
+
 </div>

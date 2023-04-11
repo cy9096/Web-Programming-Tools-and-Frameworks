@@ -1,5 +1,5 @@
 <div class="card">
-    <img src="/images/{{imageUrls}}" class="card-img-top" alt="{{headline}}">
+    <img src="/images/{{imageUrl}}" class="card-img-top" alt="{{headline}}">
     <div class="card-body">
         <h5 class="card-title"><span>{{headline}}</span></h5>
         <div>
@@ -8,6 +8,18 @@
             <div class="rental-price">C${{pricePerNight}} per/night</div>
             <br>
             <div class="card-footer" id="text-rental-footer">{{city}} • {{province}}</div>
+           {{!-- console.log("req.session.isClerk" + req.session.isClerk); {{#if req.session.isClerk}} --}}
+            
+            {{!-- <form method="get" action="/rentals/edit/{{_id}}">
+               <div class="card-footer" id="text-rental-footer"><a href="/rentals/edit/{{_id}}">Edit your property</a></div>
+            </form>
+
+            <form method="get" action="/rentals/remove/{{_id}}">
+                <div class="card-footer" id="text-rental-footer"> <a href="/rentals/remove/{{_id}}">Remove your property</a></div>
+            </form> --}}
+            {{!-- {{/if}} --}}
+
+
         </div>
     </div>
 </div>

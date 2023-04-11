@@ -17,6 +17,25 @@
               type="button">Home</button></a>
         </li>
         <li class="nav-item me-4">
+          <a class="nav-link" href="/rentals"><button class="btn btn-outline-danger btn-lg"
+              type="button">Rentals</button></a>
+        </li>
+        {{#if user}}
+
+        <li class="nav-item me-4">
+          <a class="nav-link" href="/load-data/rentals"><button class="btn btn-outline-primary btn-lg"
+              type="button">Load-data</button></a>
+        </li>
+        <li class="nav-item me-4">
+          <a class="nav-link" href="/logout"><button class="btn btn-outline-warning btn-lg"
+              type="button">Logout</button></a>
+        </li>
+
+        <li>Welcome <a href="/rentals/list"> {{user.firstName}} {{user.lastName}}</a> </li>
+
+        {{else}}
+
+        <li class="nav-item me-4">
           <a class="nav-link" href="/log-in"><button class="btn btn-outline-warning btn-lg"
               type="button">Log-in</button></a>
         </li>
@@ -24,10 +43,7 @@
           <a class="nav-link" href="/sign-up"><button class="btn btn-outline-primary btn-lg"
               type="button">Sign-up</button></a>
         </li>
-        <li class="nav-item me-4">
-          <a class="nav-link" href="/rentals"><button class="btn btn-outline-danger btn-lg"
-              type="button">Rentals</button></a>
-        </li>
+        {{/if}}
       </div>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -7,7 +7,7 @@ var rentals = [
         pricePerNight: 169.99,
         city: "Toronto",
         province: "Ontario",
-        imageUrls: "../images/1.jpg",
+        imageUrl: "../images/1.jpg",
         featuredRental: true
     },
     {
@@ -18,7 +18,7 @@ var rentals = [
         pricePerNight: 199.99,
         city: "Toronto",
         province: "Ontario",
-        imageUrls: "../images/2.jpg",
+        imageUrl: "../images/2.jpg",
         featuredRental: false
     },
     {
@@ -29,7 +29,7 @@ var rentals = [
         pricePerNight: 169.99,
         city: "Barrie",
         province: "Ontario",
-        imageUrls: "../images/3.jpg",
+        imageUrl: "../images/3.jpg",
         featuredRental: true
     },
     {
@@ -40,7 +40,7 @@ var rentals = [
         pricePerNight: 169.99,
         city: "Toronto",
         province: "Ontario",
-        imageUrls: "../images/4.jpg",
+        imageUrl: "../images/4.jpg",
         featuredRental: false
     },
     {
@@ -51,7 +51,7 @@ var rentals = [
         pricePerNight: 219.99,
         city: "Toronto",
         province: "Ontario",
-        imageUrls: "../images/5.jpg",
+        imageUrl: "../images/5.jpg",
         featuredRental: true
     },
     {
@@ -62,7 +62,7 @@ var rentals = [
         pricePerNight: 199.99,
         city: "Barrie",
         province: "Ontario",
-        imageUrls: "../images/6.jpg",
+        imageUrl: "../images/6.jpg",
         featuredRental: false
     },
 
@@ -103,18 +103,31 @@ module.exports.getRentalsByCityAndProvince = function() {
   
     return rentalsByCityAndProvince;
 }
-  // module.exports.getRentalsByCityAndProvince = function () {
-//     var result = [];
-//     for (var i = 0; i < rentals.length; i++) {
-//         var cityProvince = rentals[i].city + ", " + rentals[i].province;
-//         var existing = result.find(r => r.cityProvince == cityProvince);
-//         if (existing) {
-//             existing.rentals.push(rentals[i]);
-//         } else {
-//             result.push({ cityProvince: cityProvince, rentals: [rentals[i]] });
-//         }
 
-//         return result;
-//     }
-// }
+module.exports.listRentalsByCityAndProvince = function(rentalArr) {
+    var rentalsByCityAndProvince = [];
+  
+    // Group rentals by city and province
+    rentalArr.forEach(rental => {
+      var cityProvince = `${rental.city}, ${rental.province}`;
+      var cityProvinceIndex = rentalsByCityAndProvince.findIndex(item => item.cityProvince === cityProvince);
+  
+      if (cityProvinceIndex === -1) {
+        // Add new cityProvince to the array
+        rentalsByCityAndProvince.push({
+          cityProvince: cityProvince,
+          rentals: [rental]
+        });
+      } else {
+        // Add rental to existing cityProvince
+        rentalsByCityAndProvince[cityProvinceIndex].rentals.push(rental);
+      }
+    });
+  
+    return rentalsByCityAndProvince;
+}
 
+
+module.exports.getAllRentals = function () {
+    return rentals;
+}
