@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 
 router.get("/list", (req, res) => {
     //protect the route, so only the data clerk can access it
-    if (req.session.isClerk) {
+    if (req.session.isClerk === true) {
         //clerk is signed in, so load the data
         rentalModel.find({}, null, { sort: { headline: 1 } })
             .then((data) => {
@@ -55,7 +55,7 @@ router.get("/list", (req, res) => {
 
 router.get("/add", (req, res) => {
     //protect the route, so only the data clerk can access it
-    if (req.session.isClerk) {
+    if (req.session.isClerk === true) {
         //clerk id signed in, so load the data
         res.render("rentals/add");
     }
@@ -135,7 +135,7 @@ router.get("/edit/:id", (req, res) => {
     // Protect the route so only the data clerk can access it
     if (req.session.isClerk) {
         // Clerk is signed in, so load the data
-        const _id = req.params.id;
+        const _id = parseInt(req.params.id);
         rentalModel.findOne({ _id })
             .then((rental) => {
                 res.render("rentals/edit", {
@@ -155,8 +155,8 @@ router.get("/edit/:id", (req, res) => {
 router.post("/edit/:id", (req, res) => {
     if (req.session.isClerk) {
         // Clerk is signed in, so load the data
-        const _id = req.params.id;
-        rentalModel.updateOne({ _id }, req.body)
+        const _id = parseInt(req.params.id);
+        rentalModel.updateOne(({ _id }, req.body))
             .then(() => {
                 console.log("Rental updated");
                 res.redirect("/rentals/list");
@@ -177,7 +177,7 @@ router.get("/remove/:id", (req, res) => {
     // Protect the route so only the data clerk can access it
     if (req.session.isClerk) {
         // Clerk is signed in, so load the data
-        const _id = req.params.id;
+        const _id = parseInt(req.params.id);
         rentalModel.findOne({ _id })
             .then((rental) => {
                 res.render("rentals/remove", {
@@ -197,7 +197,7 @@ router.get("/remove/:id", (req, res) => {
 router.post("/remove/:id", (req, res) => {
     if (req.session.isClerk) {
         // Clerk is signed in, so load the data
-        const _id = req.params.id;
+        const _id = parseInt(req.params.id);
         rentalModel.deleteOne({ _id })
             .then(() => {
                 console.log("Rental removed");

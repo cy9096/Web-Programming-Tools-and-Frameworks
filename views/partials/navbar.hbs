@@ -22,14 +22,29 @@
         </li>
         {{#if user}}
 
+        {{#if isClerk}}
+
         <li class="nav-item me-4">
           <a class="nav-link" href="/load-data/rentals"><button class="btn btn-outline-primary btn-lg"
               type="button">Load-data</button></a>
         </li>
-        <li class="nav-item me-4">
+                <li class="nav-item me-4">
           <a class="nav-link" href="/logout"><button class="btn btn-outline-warning btn-lg"
               type="button">Logout</button></a>
         </li>
+        {{else}} 
+               <li class="nav-item me-4">
+          <a class="nav-link" href="/logout"><button class="btn btn-outline-warning btn-lg"
+              type="button">Logout</button></a>
+        </li>
+                <li class="nav-item me-4">
+          <a class="nav-link" href="/cart"><button class="btn btn-outline-primary btn-lg"
+              type="button">Shopping Cart</button></a>
+        </li>
+
+
+        {{/if}}
+
 
         <li>Welcome <a href="/rentals/list"> {{user.firstName}} {{user.lastName}}</a> </li>
 
@@ -45,10 +60,9 @@
         </li>
         {{/if}}
       </div>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+         <div class="cartIcon"><i><span class="material-symbols-outlined  non-empty"
+                     id="shopping-cart">shopping_cart_checkout</span></i></div>
+      {{!-- </form> --}}
     </div>
   </div>
 </nav>

@@ -5,6 +5,8 @@ const userModel = require("../models/userModel");
 const rentalModel = require("../models/rentalModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const Cart = require("../models/cartModel");
+
 
 
 // setup a 'route' to listen on the default url path (http://localhost)
@@ -41,28 +43,79 @@ router.get("/logout", (req, res) => {
     res.redirect("/log-in");
 
 });
-const findRental = (rentalId) => {
-    rentalModel.findById(rentalId)
-        .then(data => {
-            return data;
-        })
-        .catch(err => {
-            console.log("Error loading rental: " + err);
-        });
-}
+
+
+
+// let shop = document.getElementById("shop");
+
+// let basket = [{
+//     id: 0,
+//     qty: 0,
+//     price: 0,
+//     total: 0
+// }];
+// let generalShop = () => {
+//     return (shop.innerHTML = rentals.map((x) => {
+//         let {imageUrl, headline, pricePerNight, city, provence} = x;
+//         return ` 
+//         <div id =  ${id} class="card">
+//         <img src="/images/${imageUrl}" class="card-img-top" alt="${headline}">
+//         <div class="card-body">
+//             <h5 class="card-title"><span>${headline}</span></h5>
+//             <div>
+//                 <div class="rental-price">C${pricePerNight} per/night</div>
+//                 <br>
+//                 <div class="card-footer" id="text-rental-footer">${city} • ${province}</div>
+//                 <i onclick = "increament(${_id})" class="bi bi-dash-lg"></i> 
+//                 <div ${_id} class="qty">0</div>     
+//                 <i onclick = "descreament(${_id})" class="bi bi-plus-lg"></i></div>     
+//             </div>
+//         </div>
+//     </div>` ;
+//     }).join(""));
+// }
+// generalShop();
+
+// let increament = (_id) => { 
+//     let qty = document.getElementById(_id).innerHTML;
+//     qty++;
+// };
+// let descreament = (_id) => {
+//     let qty = document.getElementById(_id).innerHTML;
+//     qty--;
+//  };
+// let update = () => { };
 
 
 // setup another route to listen on /cart
 router.get("/cart", (req, res) => {
-    if (req.session.isClerk === "data_entry_clerk") {
+    if (req.session.isClerk === true) {
         res.status(401).send("You are not authorized to view this page.");
     }
     else {
+    //     res.render("general/cart", prepareViewModel(req));
+    // }
+        let cart = req.session.cart = req.session.cart || [];
+        //used to calculate the total price of the items in the cart
+        let total = 0;
+        //check if the cart has any items
+        const hasItems = cart.length > 0;
+
+        //loop through the cart and calculate the total price
+        if (hasItems) {
+            cart.forEach(rentalCart => {
+                total += rentalCart.rentals.pricePerNight * rentalCart.quantity;
+            });
+        }
         res.render("general/cart", {
-            title: "Shopping Cart page",
+            cart,
+            total,
+            hasItems,
+            title: "Shopping Cart page"
         });
     }
 });
+
 
 // setup another route to listen on /welcome
 router.get("/welcome", (req, res) => {
@@ -265,7 +318,7 @@ router.post("/log-in", (req, res) => {
                                 //Create a new session by storing the user document in the session
                                 req.session.user = user;
                                 req.session.isClerk = (req.body.isClerk === "data_entry_clerk");
-                                if (req.session.isClerk) {
+                                if (req.session.isClerk === true) {
                                     res.redirect("/rentals/list");
                                 }
                                 else {

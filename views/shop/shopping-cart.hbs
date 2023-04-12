@@ -1,0 +1,38 @@
+{{#if rentals}}
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <ul class="list-group">
+            {{#each rentals}}
+            <li class="list-group-item">
+                <span class="badge">{{quantity}}</span>
+                <strong>{{headline}}</strong>
+                <span class ="labe label-success">{{price}}</span>
+                <div class="btn-group">
+                    <button class =" btn btn-primary btn-xs dropdown-toggle" type="button">action</button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Reduce by 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Remove all</a>
+                    </ul>
+                </div>
+            </li>
+            {{/each}}   
+        </ul>
+    </div>
+</div>
+<div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <button class =" btn btn-primary btn-xs dropdown-toggle" type="button"> check out</button>
+        </div>
+
+</div>
+{{else}}
+<div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <button class =" btn btn-primary btn-xs dropdown-toggle" type="button">no item in cart</button>
+        </div>
+
+</div>
+{{/if}}

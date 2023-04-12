@@ -17,6 +17,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const fileUpload = require("express-fileupload");
+const mongoStore = require("connect-mongo");
 
 
 //setup the express app
@@ -50,7 +51,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+
+    store: mongoStore.create({ mongoUrl: process.env.MONGO_CONN_STRING }),
+    cookie: { maxAge: 180 * 60 * 1000 }
 }));
 
 app.use((req, res, next) => {
@@ -58,6 +62,12 @@ app.use((req, res, next) => {
     // This means that every single handlebars file can access this variable.
     res.locals.user = req.session.user;
     req.session.isClerk;
+    //res.locals.session = req.session;
+    next();
+});
+
+app.use(function (req, res, next) {
+    res.locals.isClerk = req.session.isClerk;
     next();
 });
 

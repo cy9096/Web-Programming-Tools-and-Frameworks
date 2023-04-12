@@ -18,8 +18,10 @@
   
   {{!-- <br> --}}
   {{#each rentals}}
-  <div>{{> rental this}}</div>
+  <div>{{> rental this}}
+  <a href="/cart/add/{{_id}}" class="btn btn-success pull-right" role ="button">Add to Shopping cart</a>
+  </div>{{/each}}
   {{!-- {{/each}} --}}
-   {{/each}}
 
 </div>
+
