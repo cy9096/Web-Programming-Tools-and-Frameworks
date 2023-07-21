@@ -1,4 +1,5 @@
 <div class="card">
+
     <img src="/images/{{imageUrl}}" class="card-img-top" alt="{{headline}}">
     <div class="card-body">
         <h5 class="card-title"><span>{{headline}}</span></h5>
@@ -7,8 +8,29 @@
 
             <div class="rental-price">C${{pricePerNight}} per/night</div>
             <br>
+
             <div class="card-footer" id="text-rental-footer">{{city}} • {{province}}</div>
-                   
+            {{!-- {{#if user}} --}}
+            {{#if isClerk}}
+            <form method="get" action="/rentals/edit/{{_id}}">
+                <div class="card-footer" id="text-rental-footer"><a href="/rentals/edit/{{_id}}">Edit your property</a>
+                </div>
+            </form>
+
+            <form method="get" action="/rentals/remove/{{_id}}">
+                <div class="card-footer" id="text-rental-footer"> <a href="/rentals/remove/{{_id}}">Remove your
+                        property</a>
+                </div>
+            </form>
+            {{else}}
+            <form method="get" action="/cart">
+            <input type="hidden" name="_id" value="{{_id}}">
+            <button type="submit" class="btn btn-primary">Rent</button>
+            </form>
+            {{/if}}
+            
+            {{!-- {{/if}} --}}
+
         </div>
     </div>
 </div>

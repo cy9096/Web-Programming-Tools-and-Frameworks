@@ -166,6 +166,83 @@ aside .col img {
 }
 
 /*==================================== shopping cart ========================================== */
+.cart-nav{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #94c2e8;
+    align-items: center;
+    padding: 0 10px;
+
+
+} 
+.cart-nav a{
+    color:rgb(223, 229, 230);
+    text-decoration: none;
+}
+.cart-nav a sup{
+    padding: 3px 7px;
+    background-color: #931313;
+    border-radius: 50%;
+    top :-20px;
+   
+
+}
+.cart-nav a.cartCount{
+    padding: 10px 30px;
+    background-color: #94c2e8;
+    border: dotted 1px #94c2e8;
+
+}
+.cart-nav i{
+    font-size: 25px;
+    color: #e3ebf1;
+}
+
+main{
+    margin-top: 60px;
+    padding: 0 10px;
+
+}
+main .container-cart{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+
+}
+
+main .container-cart .card{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    
+
+}
+
+main .callout{
+    position: fixed;
+    top: 176px;
+    right: -100%;
+    bottom: 0;
+    width: 500px;
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.5);
+    transition: all 0.5s ease-in-out;
+}
+
+main .callout.open{
+    right: 0;
+
+}
+
+
+
+
+
+
+
+
+
 .cart-navbar{
     display: flex;
     flex-direction: row;

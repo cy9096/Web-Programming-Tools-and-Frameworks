@@ -16,12 +16,9 @@
   {{!-- {{#each rentalsData}}
   <h1>{{cityProvince}}</h1> --}}
   
-  {{!-- <br> --}}
   {{#each rentals}}
-  <div>{{> rental this}}
-  <a href="/cart/add/{{_id}}" class="btn btn-success pull-right" role ="button">Add to Shopping cart</a>
+  <div>{{> rental this isClerk=../isClerk}}
   </div>{{/each}}
-  {{!-- {{/each}} --}}
 
 </div>
 

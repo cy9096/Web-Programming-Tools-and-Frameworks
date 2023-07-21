@@ -2,65 +2,64 @@
     <div class="border border-dark p-4 border-opacity-75">
         <div class="row">
             <div class="sign-up-title">
-                <h1>Add Rental List</h1>
-                <p>Add your property here</p>
+                <h1>Edit Rental List</h1>
+                <p>Change your property details</p>
             </div>
-            <form method="post" action="/rentals/edit" id="editItem" class="was-validated"
-                enctype="multipart/form-data">
+            <form method="post" action="/rentals/edit/{{_id}}" id="addItem" class="was-validated" enctype="multipart/form-data">
                 <label for="headline" class="form-label">Headline</label>
                 <input type="text" class="form-control" id="headline" name="headline" value="{{rental.headline}}"
                     placeholder="headline" required>
-                <div class="invalid-feedback">Headline is required</div>
+               {{!-- <div class="invalid-feedback">Headline is required</div> --}}
 
 
 
                 <label for="numSleeps" class="form-label">Number Of Sleeps</label>
                 <input type="number”" class="form-control" id="numSleeps" name="numSleeps" value="{{rental.numSleeps}}"
                     placeholder="numSleeps" required min="1" max="100">
-                <div class="invalid-feedback">
+                {{!-- <div class="invalid-feedback">
                     Please enter a number between 1 and 100.
-                </div>
+                </div> --}}
 
                 <label for="numBedrooms" class="form-label">Number Of Bedrooms</label>
                 <input type="number”" class="form-control" id="numBedrooms" name="numBedrooms"
                     value="{{rental.numBedrooms}}" placeholder="numBedrooms" required min="1" max="100">
-                <div class="invalid-feedback">
+                {{!-- <div class="invalid-feedback">
                     Please enter a number between 1 and 100.
-                </div>
+                </div> --}}
 
                 <label for="numBathrooms" class="form-label">Number Of Bathrooms</label>
                 <input type="number”" class="form-control" id="numBathrooms" name="numBathrooms"
                     value="{{rental.numBathrooms}}" placeholder="numBathrooms" required min="1" max="100">
-                <div class="invalid-feedback">
+                {{!-- <div class="invalid-feedback">
                     Please enter a number between 1 and 100.
-                </div>
+                </div> --}}
 
                 <label for="pricePerNight" class="form-label">Price Per Night</label>
                 <input type="number”" class="form-control" id="pricePerNight" name="pricePerNight"
                     value="{{rental.pricePerNight}}" placeholder="pricePerNight" required min="0.00">
-                <div class="invalid-feedback">Province is required</div>
+                {{!-- <div class="invalid-feedback">Province is required</div> --}}
 
                 <label for="city" class="form-label">City</label>
                 <input type="text" class="form-control" id="city" name="city" value="{{rental.city}}" placeholder="city"
                     required maxlength="20">
-                <div class="invalid-feedback">City is required</div>
+                {{!-- <div class="invalid-feedback">City is required</div> --}}
 
                 <label for="province" class="form-label">Province</label>
                 <input type="text" class="form-control" id="province" name="province" value="{{rental.province}}"
                     placeholder="province" required maxlength="20">
-                <div class="invalid-feedback">Province is required</div>
+                {{!-- <div class="invalid-feedback">Province is required</div> --}}
 
-                <label for="province" class="form-label">Image</label>
+                <label for="rentalPic" class="form-label">Image</label>
                 <input type="file" class="form-control" name="rentalPic" id="rentalPic" aria-describedby="rentalPic"
                     aria-label="rentalPic" required>
-                <div class="invalid-feedback">Please upload your file</div>
+                {{!-- <div class="invalid-feedback">Please upload your file</div> --}}
 
 
                 <div class="form-check">
                     <input class="featuredRental" type="checkbox" id="featuredRental" name="featuredRental" checked>
                     <label for="featuredRental" class="form-label">Featured Rental</label>
                 </div>
-                <input type="submit" value="Edit Item">
+                <input type="submit" value="Confirm">
             </form>
         </div>
     </div>

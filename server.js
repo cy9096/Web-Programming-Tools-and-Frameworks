@@ -61,13 +61,9 @@ app.use((req, res, next) => {
     // res.locals.user is a global handlebars variable.
     // This means that every single handlebars file can access this variable.
     res.locals.user = req.session.user;
-    req.session.isClerk;
+    res.locals.isClerk = req.session.isClerk
+    // req.session.isClerk;
     //res.locals.session = req.session;
-    next();
-});
-
-app.use(function (req, res, next) {
-    res.locals.isClerk = req.session.isClerk;
     next();
 });
 

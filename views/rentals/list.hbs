@@ -21,16 +21,7 @@
 
    {{#each rentals}}
    <div>
-      {{> rental this}}
-      
-      <form method="get" action="/rentals/edit/{{_id}}">
-         <div class="card-footer" id="text-rental-footer"><a href="/rentals/edit/{{_id}}">Edit your property</a></div>
-      </form>
-
-      <form method="get" action="/rentals/remove/{{_id}}">
-         <div class="card-footer" id="text-rental-footer"> <a href="/rentals/remove/{{_id}}">Remove your property</a>
-         </div>
-      </form>
+      {{> rental this isClerk=../isClerk}}
    </div>
    {{/each}}
    {{else}}

@@ -7,6 +7,10 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const Cart = require("../models/cartModel");
 
+// //find rental by id
+// const findRentalById = (_id) => {
+//     return rentals.find(rental => rental.id === _id);
+// }
 
 
 // setup a 'route' to listen on the default url path (http://localhost)
@@ -31,7 +35,7 @@ router.get("/", (req, res) => {
 // setup another route to listen on /log-in
 router.get("/log-in", (req, res) => {
     res.render("general/log-in", {
-        title: "Log-in page"
+        title: "Log in page"
     });
 });
 
@@ -46,75 +50,59 @@ router.get("/logout", (req, res) => {
 
 
 
-// let shop = document.getElementById("shop");
-
-// let basket = [{
-//     id: 0,
-//     qty: 0,
-//     price: 0,
-//     total: 0
-// }];
-// let generalShop = () => {
-//     return (shop.innerHTML = rentals.map((x) => {
-//         let {imageUrl, headline, pricePerNight, city, provence} = x;
-//         return ` 
-//         <div id =  ${id} class="card">
-//         <img src="/images/${imageUrl}" class="card-img-top" alt="${headline}">
-//         <div class="card-body">
-//             <h5 class="card-title"><span>${headline}</span></h5>
-//             <div>
-//                 <div class="rental-price">C${pricePerNight} per/night</div>
-//                 <br>
-//                 <div class="card-footer" id="text-rental-footer">${city} • ${province}</div>
-//                 <i onclick = "increament(${_id})" class="bi bi-dash-lg"></i> 
-//                 <div ${_id} class="qty">0</div>     
-//                 <i onclick = "descreament(${_id})" class="bi bi-plus-lg"></i></div>     
-//             </div>
-//         </div>
-//     </div>` ;
-//     }).join(""));
-// }
-// generalShop();
-
-// let increament = (_id) => { 
-//     let qty = document.getElementById(_id).innerHTML;
-//     qty++;
-// };
-// let descreament = (_id) => {
-//     let qty = document.getElementById(_id).innerHTML;
-//     qty--;
-//  };
-// let update = () => { };
-
-
 // setup another route to listen on /cart
 router.get("/cart", (req, res) => {
-    if (req.session.isClerk === true) {
+    if (req.session.user && req.session.isClerk === true) {
         res.status(401).send("You are not authorized to view this page.");
+    } else if (req.session.user && req.session.isClerk === false) {
+        const addCart = rentals.findById(req.body._id);
+
+        Cart.save(addCart);
+        console.log(Cart.getCart());
     }
     else {
-    //     res.render("general/cart", prepareViewModel(req));
-    // }
-        let cart = req.session.cart = req.session.cart || [];
-        //used to calculate the total price of the items in the cart
-        let total = 0;
-        //check if the cart has any items
-        const hasItems = cart.length > 0;
-
-        //loop through the cart and calculate the total price
-        if (hasItems) {
-            cart.forEach(rentalCart => {
-                total += rentalCart.rentals.pricePerNight * rentalCart.quantity;
-            });
-        }
-        res.render("general/cart", {
-            cart,
-            total,
-            hasItems,
-            title: "Shopping Cart page"
+        res.render("general/log-in", {
+            title: "You must log in to view this page."
         });
     }
 });
+
+
+router.post("/cart", (req, res) => {
+    if (req.session.user && req.session.isClerk === true) {
+        res.status(401).send("You are not authorized to view this page.");
+    }
+    else if (req.session.user === undefined) {
+        res.render("general/log-in", {
+            title: "You must log in to view this page."
+        });
+    }
+    else {
+        const rentalID = req.body._id;
+        rentalModel.findOne({ _id: rentalID }).then(data => {
+            let rental = data.toObject();
+            rental.pricePerNight = parseFloat(rental.pricePerNight).toFixed(2);
+            return rental;
+        }).catch(err => {
+            res.send("Error loading featured rentals: " + err);
+        });
+
+        let cart = req.session.cart = req.session.cart || [];
+
+        let rentalCart = cart.findIndex(rental => rental.rentals._id === rentalID);
+        if (rentalCart) {
+            rentalCart.quantity++;
+        }
+        else {
+            cart.push({
+                rentals: rental,
+                quantity: 1
+            });
+        }
+        res.redirect("/cart");
+    }
+});
+
 
 
 // setup another route to listen on /welcome
