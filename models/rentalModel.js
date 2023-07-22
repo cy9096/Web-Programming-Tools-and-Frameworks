@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const bcryptjs = require("bcryptjs");
-const rentals = require("../models/rentals-db");
 
 const rentalSchema = new mongoose.Schema({
     headline: { type: String, required: true },
