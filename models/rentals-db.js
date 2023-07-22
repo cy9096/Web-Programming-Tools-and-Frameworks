@@ -45,7 +45,7 @@ var rentals = [
     city: "Toronto",
     province: "Ontario",
     imageUrl: "../images/4.jpg",
-    featuredRental: True
+    featuredRental: true
   },
   {
     //id: 5,
@@ -57,7 +57,7 @@ var rentals = [
     city: "Toronto",
     province: "Ontario",
     imageUrl: "../images/5.jpg",
-    featuredRental: False
+    featuredRental: false
   },
   {
    // id: 6,
