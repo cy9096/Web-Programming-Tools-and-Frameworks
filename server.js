@@ -4,9 +4,9 @@
 * Policy. No part of this assignment has been copied manually or electronically from
 * any other source (including web sites) or distributed to other students.
 *
-* Student Name  : Wing Lo
-* Student ID    : 109191213
-* Course/Section: WEB322 NCC
+* Student Name  : 
+* Student ID    : 
+* Course/Section: 
 *
 **************************************************************************************/
 const path = require("path");
