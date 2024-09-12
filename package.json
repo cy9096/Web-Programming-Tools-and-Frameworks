@@ -32,6 +32,6 @@
     "express-fileupload": "^1.4.0",
     "express-handlebars": "^7.0.2",
     "express-session": "^1.17.3",
-    "mongoose": "^7.0.2"
+    "mongoose": "^7.3.3"
   }
 }
